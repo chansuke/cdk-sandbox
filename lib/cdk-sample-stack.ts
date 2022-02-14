@@ -5,7 +5,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { AwsParam } from './param';
 
 export interface CdkSampleStackProps extends StackProps {
-  aws: AwsParam,
+  aws: AwsParam;
 }
 
 export class CdkSampleStack extends Stack {
@@ -20,7 +20,7 @@ export class CdkSampleStack extends Stack {
 
     new ec2.CfnVPC(this, 'MyVPC', {
       cidrBlock: '10.0.0.0/16',
-      tags: [{ key: 'Name', value: `${systemName}-${envType}-vpc` }]
+      tags: [{ key: 'Name', value: `${systemName}-${envType}-vpc` }],
     });
   }
 }
