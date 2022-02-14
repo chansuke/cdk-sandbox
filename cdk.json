@@ -26,6 +26,9 @@
     "@aws-cdk/core:target-partitions": [
       "aws",
       "aws-cn"
-    ]
+    ],
+
+    "envType": "stg",
+    "systemName": "activetimer"
   }
 }

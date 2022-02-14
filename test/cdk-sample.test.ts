@@ -15,7 +15,7 @@ describe('testing VPC', () => {
 
     template.hasResourceProperties('AWS::EC2::VPC', {
       CidrBlock: '10.0.0.0/16',
-      Tags: [{ 'Key': 'Name', 'Value': 'activetimer-stg-vpc' }]
+      Tags: [{ 'Key': 'Name', 'Value': 'undefined-undefined-vpc' }]
     })
     template.resourceCountIs('AWS::EC2::VPC', 1);
   })
