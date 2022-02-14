@@ -2,9 +2,16 @@
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { CdkSampleStack } from '../lib/cdk-sample-stack';
+import { paramFromEnv } from '../lib/param';
 
+const param = paramFromEnv();
 const app = new cdk.App();
 new CdkSampleStack(app, 'CdkSampleStack', {
+  aws: param,
+//new StagingEksStack(app, 'staging', {
+//  aws: param,
+//  adminIamUsers: adminIamUsers,
+//});
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
