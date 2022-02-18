@@ -7,7 +7,7 @@ export class Vpc extends Resource {
 
   constructor() {
     super();
-  };
+  }
 
   createResources(scope: Construct) {
     this.vpc = new ec2.CfnVPC(scope, 'MyVPC', {

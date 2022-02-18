@@ -20,7 +20,6 @@ export class CdkSampleStack extends Stack {
     const vpc = new Vpc();
     vpc.createResources(this);
 
-
     // Subnet
     const subnet = new Subnet(vpc.vpc);
     subnet.createResources(this);

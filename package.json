@@ -9,7 +9,7 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "fmt": "prettier --write */*.ts"
+    "fmt": "prettier --write ."
   },
   "devDependencies": {
     "@aws-cdk/assert": "^2.12.0",
