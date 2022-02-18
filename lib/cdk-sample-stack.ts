@@ -2,6 +2,7 @@ import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { Vpc } from './resource/vpc';
 import { Subnet } from './resource/subnet';
+import { InternetGateway } from './resource/internet-gateway';
 
 import { AwsParam } from './param';
 
@@ -23,5 +24,9 @@ export class CdkSampleStack extends Stack {
     // Subnet
     const subnet = new Subnet(vpc.vpc);
     subnet.createResources(this);
+
+    // Internet Gateway
+    const internetGateway = new InternetGateway(vpc.vpc);
+    internetGateway.createResources(this);
   }
 }
