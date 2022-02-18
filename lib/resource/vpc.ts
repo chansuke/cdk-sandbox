@@ -1,18 +1,18 @@
 import { Construct } from 'constructs';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import { Resource } from './abstract/resource';
 
-export class Vpc {
+export class Vpc extends Resource {
   public vpc: ec2.CfnVPC;
 
-  constructor() {};
+  constructor() {
+    super();
+  };
 
-  public createResources(scope: Construct) {
-    const systemName = scope.node.tryGetContext('systemName');
-    const envType = scope.node.tryGetContext('envType');
-
+  createResources(scope: Construct) {
     this.vpc = new ec2.CfnVPC(scope, 'MyVPC', {
       cidrBlock: '10.0.0.0/16',
-      tags: [{ key: 'Name', value: `${systemName}-${envType}-vpc` }],
+      tags: [{ key: 'Name', value: this.createResourceName(scope, 'vpc') }],
     });
   }
 }
