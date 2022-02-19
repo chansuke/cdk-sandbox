@@ -4,6 +4,7 @@ import { Vpc } from './resource/vpc';
 import { Subnet } from './resource/subnet';
 import { InternetGateway } from './resource/internet-gateway';
 import { ElasticIp } from './resource/elascic-ip';
+import { NatGateway } from './resource/nat-gateway';
 
 import { AwsParam } from './param';
 
@@ -33,5 +34,14 @@ export class CdkSampleStack extends Stack {
     // Elastic IP
     const elasticIp = new ElasticIp();
     elasticIp.createResources(this);
+
+    // NAT Gateway
+    const natGateway = new NatGateway(
+      subnet.public1a,
+      subnet.public1c,
+      elasticIp.ngw1a,
+      elasticIp.ngw1c
+    );
+    natGateway.createResources(this);
   }
 }
