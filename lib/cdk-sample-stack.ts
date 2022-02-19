@@ -3,6 +3,7 @@ import { Construct } from 'constructs';
 import { Vpc } from './resource/vpc';
 import { Subnet } from './resource/subnet';
 import { InternetGateway } from './resource/internet-gateway';
+import { ElasticIp } from './resource/elascic-ip';
 
 import { AwsParam } from './param';
 
@@ -28,5 +29,9 @@ export class CdkSampleStack extends Stack {
     // Internet Gateway
     const internetGateway = new InternetGateway(vpc.vpc);
     internetGateway.createResources(this);
+
+    // Elastic IP
+    const elasticIp = new ElasticIp();
+    elasticIp.createResources(this);
   }
 }
