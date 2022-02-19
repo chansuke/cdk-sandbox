@@ -5,6 +5,7 @@ import { Subnet } from './resource/subnet';
 import { InternetGateway } from './resource/internet-gateway';
 import { ElasticIp } from './resource/elascic-ip';
 import { NatGateway } from './resource/nat-gateway';
+import { RouteTable } from './resource/route-table';
 
 import { AwsParam } from './param';
 
@@ -43,5 +44,20 @@ export class CdkSampleStack extends Stack {
       elasticIp.ngw1c
     );
     natGateway.createResources(this);
+
+    // Route Table
+    const routeTable = new RouteTable(
+      vpc.vpc,
+      subnet.public1a,
+      subnet.public1c,
+      subnet.app1a,
+      subnet.app1c,
+      subnet.db1a,
+      subnet.db1c,
+      internetGateway.igw,
+      natGateway.ngw1a,
+      natGateway.ngw1c
+    );
+    routeTable.createResources(this);
   }
 }
