@@ -2,7 +2,6 @@ import { Template } from 'aws-cdk-lib/assertions';
 import * as cdk from 'aws-cdk-lib';
 import * as ActiveTimer from '../../lib/cdk-sample-stack';
 
-
 describe('testing Subnet', () => {
   test('check resources', () => {
     const app = new cdk.App();

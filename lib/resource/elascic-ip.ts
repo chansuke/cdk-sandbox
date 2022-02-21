@@ -16,13 +16,13 @@ export class ElasticIp extends Resource {
     {
       id: 'ElasticIpNgw1a',
       resourceName: 'eip-ngw-1a',
-      assign: elasticIp => this.ngw1a = elasticIp
+      assign: (elasticIp) => (this.ngw1a = elasticIp),
     },
     {
       id: 'ElasticIpNgw1c',
       resourceName: 'eip-ngw-1c',
-      assign: elasticIp => this.ngw1c = elasticIp
-    }
+      assign: (elasticIp) => (this.ngw1c = elasticIp),
+    },
   ];
 
   constructor() {
@@ -30,21 +30,23 @@ export class ElasticIp extends Resource {
   }
 
   createResources(scope: Construct) {
-      for (const resourceInfo of this.resourcesInfo) {
-          const elasticIp = this.createElasticIp(scope, resourceInfo);
-          resourceInfo.assign(elasticIp);
-      }
+    for (const resourceInfo of this.resourcesInfo) {
+      const elasticIp = this.createElasticIp(scope, resourceInfo);
+      resourceInfo.assign(elasticIp);
+    }
   }
 
   private createElasticIp(scope: Construct, resourceInfo: ResourceInfo): CfnEIP {
-      const elasticIp = new CfnEIP(scope, resourceInfo.id, {
-          domain: 'vpc',
-          tags: [{
-              key: 'Name',
-              value: this.createResourceName(scope, resourceInfo.resourceName)
-          }]
-      });
+    const elasticIp = new CfnEIP(scope, resourceInfo.id, {
+      domain: 'vpc',
+      tags: [
+        {
+          key: 'Name',
+          value: this.createResourceName(scope, resourceInfo.resourceName),
+        },
+      ],
+    });
 
-      return elasticIp;
+    return elasticIp;
   }
 }

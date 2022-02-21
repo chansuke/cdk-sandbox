@@ -2,7 +2,6 @@ import { Template } from 'aws-cdk-lib/assertions';
 import * as cdk from 'aws-cdk-lib';
 import * as ActiveTimer from '../../lib/cdk-sample-stack';
 
-
 describe('testing NatGateway', () => {
   test('check resources', () => {
     const app = new cdk.App();
@@ -10,7 +9,6 @@ describe('testing NatGateway', () => {
     const stack = new ActiveTimer.CdkSampleStack(app, 'ActiveTimerStack');
 
     const template = Template.fromStack(stack);
-
 
     template.resourceCountIs('AWS::EC2::NatGateway', 2);
     template.hasResourceProperties('AWS::EC2::NatGateway', {

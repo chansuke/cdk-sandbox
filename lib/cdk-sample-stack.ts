@@ -6,6 +6,7 @@ import { InternetGateway } from './resource/internet-gateway';
 import { ElasticIp } from './resource/elascic-ip';
 import { NatGateway } from './resource/nat-gateway';
 import { RouteTable } from './resource/route-table';
+import { NetworkAcl } from './resource/network-acl';
 
 import { AwsParam } from './param';
 
@@ -37,12 +38,7 @@ export class CdkSampleStack extends Stack {
     elasticIp.createResources(this);
 
     // NAT Gateway
-    const natGateway = new NatGateway(
-      subnet.public1a,
-      subnet.public1c,
-      elasticIp.ngw1a,
-      elasticIp.ngw1c
-    );
+    const natGateway = new NatGateway(subnet.public1a, subnet.public1c, elasticIp.ngw1a, elasticIp.ngw1c);
     natGateway.createResources(this);
 
     // Route Table
@@ -56,8 +52,20 @@ export class CdkSampleStack extends Stack {
       subnet.db1c,
       internetGateway.igw,
       natGateway.ngw1a,
-      natGateway.ngw1c
+      natGateway.ngw1c,
     );
     routeTable.createResources(this);
+
+    // Network ACL
+    const networkAcl = new NetworkAcl(
+      vpc.vpc,
+      subnet.public1a,
+      subnet.public1c,
+      subnet.app1a,
+      subnet.app1c,
+      subnet.db1a,
+      subnet.db1c,
+    );
+    networkAcl.createResources(this);
   }
 }

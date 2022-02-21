@@ -20,38 +20,33 @@ export class NatGateway extends Resource {
   private readonly elasticIpNgw1c: CfnEIP;
   private readonly resourcesInfo: ResourceInfo[] = [
     {
-        id: 'NatGateway1a',
-        resourceName: 'ngw-1a',
-        allocationId: () => this.elasticIpNgw1a.attrAllocationId,
-        subnetId: () => this.subnetPublic1a.ref,
-        assign: natGateway => this.ngw1a = natGateway
+      id: 'NatGateway1a',
+      resourceName: 'ngw-1a',
+      allocationId: () => this.elasticIpNgw1a.attrAllocationId,
+      subnetId: () => this.subnetPublic1a.ref,
+      assign: (natGateway) => (this.ngw1a = natGateway),
     },
     {
-        id: 'NatGateway1c',
-        resourceName: 'ngw-1c',
-        allocationId: () => this.elasticIpNgw1c.attrAllocationId,
-        subnetId: () => this.subnetPublic1c.ref,
-        assign: natGateway => this.ngw1c = natGateway
-    }
+      id: 'NatGateway1c',
+      resourceName: 'ngw-1c',
+      allocationId: () => this.elasticIpNgw1c.attrAllocationId,
+      subnetId: () => this.subnetPublic1c.ref,
+      assign: (natGateway) => (this.ngw1c = natGateway),
+    },
   ];
 
-  constructor(
-    subnetPublic1a: CfnSubnet,
-    subnetPublic1c: CfnSubnet,
-    elasticIpNgw1a: CfnEIP,
-    elasticIpNgw1c: CfnEIP
-  ) {
+  constructor(subnetPublic1a: CfnSubnet, subnetPublic1c: CfnSubnet, elasticIpNgw1a: CfnEIP, elasticIpNgw1c: CfnEIP) {
     super();
     this.subnetPublic1a = subnetPublic1a;
     this.subnetPublic1c = subnetPublic1c;
     this.elasticIpNgw1a = elasticIpNgw1a;
     this.elasticIpNgw1c = elasticIpNgw1c;
-  };
+  }
 
   createResources(scope: Construct) {
     for (const resourceInfo of this.resourcesInfo) {
-        const natGateway = this.createNatGateway(scope, resourceInfo);
-        resourceInfo.assign(natGateway);
+      const natGateway = this.createNatGateway(scope, resourceInfo);
+      resourceInfo.assign(natGateway);
     }
   }
 
@@ -59,10 +54,12 @@ export class NatGateway extends Resource {
     const natGateway = new CfnNatGateway(scope, resourceInfo.id, {
       allocationId: resourceInfo.allocationId(),
       subnetId: resourceInfo.subnetId(),
-      tags: [{
-        key: 'Name',
-        value: this.createResourceName(scope, resourceInfo.resourceName)
-      }]
+      tags: [
+        {
+          key: 'Name',
+          value: this.createResourceName(scope, resourceInfo.resourceName),
+        },
+      ],
     });
 
     return natGateway;
