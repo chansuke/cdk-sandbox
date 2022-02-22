@@ -30,7 +30,7 @@ describe('testing NatGateway', () => {
       Protocol: -1,
       RuleAction: 'allow',
       RuleNumber: 100,
-      CidrBlock: '0.0.0.0/0'
+      CidrBlock: '0.0.0.0/0',
     });
     template.hasResourceProperties('AWS::EC2::NetworkAclEntry', {
       NetworkAclId: Match.anyValue(),
@@ -38,14 +38,13 @@ describe('testing NatGateway', () => {
       RuleAction: 'allow',
       RuleNumber: 100,
       CidrBlock: '0.0.0.0/0',
-      Egress: true
+      Egress: true,
     });
-
 
     template.resourceCountIs('AWS::EC2::SubnetNetworkAclAssociation', 6);
     template.hasResourceProperties('AWS::EC2::SubnetNetworkAclAssociation', {
       NetworkAclId: Match.anyValue(),
-      SubnetId: Match.anyValue()
+      SubnetId: Match.anyValue(),
     });
-  })
-})
+  });
+});

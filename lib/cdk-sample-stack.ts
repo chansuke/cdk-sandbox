@@ -7,6 +7,7 @@ import { ElasticIp } from './resource/elascic-ip';
 import { NatGateway } from './resource/nat-gateway';
 import { RouteTable } from './resource/route-table';
 import { NetworkAcl } from './resource/network-acl';
+import { IamRole  } from './resource/iam-role';
 
 import { AwsParam } from './param';
 
@@ -67,5 +68,9 @@ export class CdkSampleStack extends Stack {
       subnet.db1c,
     );
     networkAcl.createResources(this);
+
+    // IAM Role
+    const iamRole = new IamRole();
+    iamRole.createResources(this);
   }
 }
