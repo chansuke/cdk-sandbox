@@ -31,9 +31,7 @@ export class IamRole extends Resource {
         principals: [new ServicePrincipal('ec2.amazonaws.com')],
         actions: ['sts:AssumeRole'],
       },
-      managedPolicyArns: [
-        'arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore',
-      ],
+      managedPolicyArns: ['arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore'],
       roleName: 'role-ec2',
       assign: (role) => (this.ec2 = role),
     },

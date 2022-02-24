@@ -10,43 +10,42 @@ describe('testing IamRole', () => {
 
     const template = Template.fromStack(stack);
 
-
     template.resourceCountIs('AWS::IAM::Role', 2);
     template.hasResourceProperties('AWS::IAM::Role', {
-        AssumeRolePolicyDocument: {
-            Statement: [{
-                Effect: 'Allow',
-                Principal: {
-                    Service: Match.anyValue()
-                },
-                Action: 'sts:AssumeRole'
-            }]
-        },
-        ManagedPolicyArns: [
-            'arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore',
+      AssumeRolePolicyDocument: {
+        Statement: [
+          {
+            Effect: 'Allow',
+            Principal: {
+              Service: Match.anyValue(),
+            },
+            Action: 'sts:AssumeRole',
+          },
         ],
-        RoleName: 'undefined-undefined-role-ec2'
+      },
+      ManagedPolicyArns: ['arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore'],
+      RoleName: 'undefined-undefined-role-ec2',
     });
     template.hasResourceProperties('AWS::IAM::Role', {
-        AssumeRolePolicyDocument: {
-            Statement: [{
-                Effect: 'Allow',
-                Principal: {
-                    Service: 'monitoring.rds.amazonaws.com'
-                },
-                Action: 'sts:AssumeRole'
-            }]
-        },
-        ManagedPolicyArns: [
-            'arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole'
+      AssumeRolePolicyDocument: {
+        Statement: [
+          {
+            Effect: 'Allow',
+            Principal: {
+              Service: 'monitoring.rds.amazonaws.com',
+            },
+            Action: 'sts:AssumeRole',
+          },
         ],
-        RoleName: 'undefined-undefined-role-rds'
+      },
+      ManagedPolicyArns: ['arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole'],
+      RoleName: 'undefined-undefined-role-rds',
     });
 
     template.resourceCountIs('AWS::IAM::InstanceProfile', 1);
     template.hasResourceProperties('AWS::IAM::InstanceProfile', {
-        Roles: Match.anyValue(),
-        InstanceProfileName: 'undefined-undefined-role-ec2'
+      Roles: Match.anyValue(),
+      InstanceProfileName: 'undefined-undefined-role-ec2',
     });
-  })
-})
+  });
+});
